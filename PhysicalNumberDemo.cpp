@@ -8,15 +8,16 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-using std::cout, std::endl, std::boolalpha, std::istringstream;
+using namespace std;
 #include "PhysicalNumber.h"
 #include "Unit.h"
-using ariel::PhysicalNumber, ariel::Unit;
+using namespace ariel;
 
 int main() {
 	try {
 		PhysicalNumber a(2, Unit::KM);   // 2 kilometers
 		PhysicalNumber b(300, Unit::M);  // 300 meters
+		/*
 		cout << a << endl;   // Prints "2[km]"
 		cout << (a + b) << endl;   // Prints "2.3[km]"
 		cout << (b - a) << endl;   // Prints "-1700[m]"
@@ -39,6 +40,7 @@ int main() {
 		catch (const std::exception& ex) {
 			cout << ex.what() << endl; // Prints "Units do not match - [m] cannot be converted to [kg]"
 		}
+		*/
 	}
 	catch (...) {
 		cout << "Unexpected exception!" << endl;
