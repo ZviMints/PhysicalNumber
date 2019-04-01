@@ -15,98 +15,113 @@ PhysicalNumber::PhysicalNumber(double _value, Unit::time _unit) : _value(_value)
 	this->_time = _unit;
 }
 
-const PhysicalNumber PhysicalNumber::operator-() const
+const PhysicalNumber ariel::PhysicalNumber::operator-() const
 {
-	return *this; 
+	return *this;
+}
+
+const PhysicalNumber ariel::PhysicalNumber::operator+() const
+{
+	return *this;
+}
+
+const PhysicalNumber& ariel::PhysicalNumber::operator+(const PhysicalNumber& other) const
+{
 	// TODO: insert return statement here
+	return *this;
 }
 
-const PhysicalNumber PhysicalNumber::operator+() const
+const PhysicalNumber& ariel::PhysicalNumber::operator-(const PhysicalNumber& other) const
 {
-	return *this;
-	// TODO: insert return statement here}
-}
-const PhysicalNumber & PhysicalNumber::operator+(const PhysicalNumber & other) const
-{
-	return *this;
-	// TODO: insert return statement here}
-}
-const PhysicalNumber & PhysicalNumber::
-operator-(const PhysicalNumber & other) const
-{
-	return *this;
-	// TODO: insert return statement here}
-}
-PhysicalNumber & PhysicalNumber::operator+=(const PhysicalNumber & other)
-{
-	return *this;
-	//TODO: insert return statement here
-}
-
-PhysicalNumber & PhysicalNumber::operator-=(const PhysicalNumber & other)
-{
-	return *this;
-	//	TODO: insert return statement here
-}
-
-PhysicalNumber & PhysicalNumber::operator=(const PhysicalNumber & other)
-{
-	return *this;
 	// TODO: insert return statement here
-}
-
-PhysicalNumber & PhysicalNumber::operator++(int)
-{
 	return *this;
-	// TODO: insert return statement here
 }
 
-PhysicalNumber & PhysicalNumber::operator++()
+PhysicalNumber& ariel::PhysicalNumber::operator+=(const PhysicalNumber& other)
 {
-	return *this;
 	// TODO: insert return statement here
+	return *this;
 }
 
-PhysicalNumber & PhysicalNumber::operator--(int)
+PhysicalNumber& ariel::PhysicalNumber::operator-=(const PhysicalNumber& other)
 {
-	return *this;
 	// TODO: insert return statement here
+	return *this;
 }
 
-PhysicalNumber & PhysicalNumber::operator--()
+PhysicalNumber& ariel::PhysicalNumber::operator=(const PhysicalNumber& other)
 {
-	return *this;
 	// TODO: insert return statement here
+	return *this;
 }
 
-PhysicalNumber & PhysicalNumber::operator*=(const PhysicalNumber & other)
+PhysicalNumber& ariel::PhysicalNumber::operator++(int)
 {
-	return *this;
 	// TODO: insert return statement here
+	return *this;
 }
 
-PhysicalNumber & PhysicalNumber::operator/=(const PhysicalNumber & other)
+PhysicalNumber& ariel::PhysicalNumber::operator++()
+{
+	// TODO: insert return statement here
+	return *this;
+}
+
+PhysicalNumber& ariel::PhysicalNumber::operator--(int)
+{
+	// TODO: insert return statement here
+	return *this;
+}
+
+PhysicalNumber& ariel::PhysicalNumber::operator--()
+{
+	// TODO: insert return statement here
+	return *this;
+}
+
+PhysicalNumber& ariel::PhysicalNumber::operator/(const PhysicalNumber & other)
 {
 	return *this;
 	// TODO: insert return statement here
 }
 
-bool operator==(const PhysicalNumber & p1, const PhysicalNumber & p2)
+PhysicalNumber& ariel::PhysicalNumber::operator*(const PhysicalNumber & other)
+{
+	return *this;
+	// TODO: insert return statement here
+}
+
+PhysicalNumber& ariel::PhysicalNumber::operator*=(const PhysicalNumber& other)
+{
+	// TODO: insert return statement here
+	return *this;
+}
+
+PhysicalNumber& ariel::PhysicalNumber::operator/=(const PhysicalNumber& other)
+{
+	// TODO: insert return statement here
+	return *this;
+}
+
+bool ariel::operator==(const PhysicalNumber& p1, const PhysicalNumber& p2)
 {
 	return false;
 }
 
-bool operator<(const PhysicalNumber & p1, const PhysicalNumber & p2)
+bool ariel::operator<(const PhysicalNumber& p1, const PhysicalNumber& p2)
 {
 	return false;
 }
 
-std::ostream & operator<<(std::ostream & os, const PhysicalNumber & other)
+std::ostream & ariel::operator<<(std::ostream & os, const PhysicalNumber& other)
 {
+	// TODO: insert return statement here
 	return os;
 }
 
-std::istream & operator>>(std::istream & is, PhysicalNumber & other)
+std::istream & ariel::operator>>(std::istream & is, PhysicalNumber& other)
 {
+	// TODO: insert return statement here
 	return is;
 }
+

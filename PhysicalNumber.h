@@ -46,11 +46,11 @@ namespace ariel {
 		friend std::istream& operator>>(std::istream& is, PhysicalNumber& other);
 
 		// Bonus:
-		friend const PhysicalNumber& operator/(const PhysicalNumber& p1, const PhysicalNumber& p2);
-		friend const PhysicalNumber& operator* (const PhysicalNumber& p1, const PhysicalNumber& p2);
+		PhysicalNumber& operator/(const PhysicalNumber& other);
+		PhysicalNumber& operator* (const PhysicalNumber& other);
 		PhysicalNumber& operator*=(const PhysicalNumber& other);
 		PhysicalNumber& operator/=(const PhysicalNumber& other);
-
+		
 	};
 }
 #endif
