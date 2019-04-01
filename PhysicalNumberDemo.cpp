@@ -11,7 +11,6 @@
 using namespace std;
 #include "PhysicalNumber.h"
 #include "Unit.h"
-using namespace ariel;
 
 int main() {
 	try {
