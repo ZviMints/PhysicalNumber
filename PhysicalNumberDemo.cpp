@@ -25,6 +25,7 @@ int main() {
 		cout << (a + b) << endl;   // Prints "2.3[km]"
 		cout << (b - a) << endl;   // Prints "-1700[m]"
 		cout << (-a) << endl;   // Prints "-2[km]"
+		cout << (++a) << endl;
 		
 		cout << boolalpha; // print booleans as strings from now on:
 		cout << (a > b) << endl;  // Prints "true"
