@@ -30,7 +30,7 @@ int main() {
 		cout << boolalpha; // print booleans as strings from now on:
 		cout << (a > b) << endl;  // Prints "true"
 		cout << (a <= b) << endl;  // Prints "false"
-	//	cout << (a == PhysicalNumber(2000, Unit::M)) << endl;  // Prints "true"
+		cout << (a == PhysicalNumber(2000, Unit::M)) << endl;  // Prints "true"
 		
 		istringstream input("700[kg]");
 		input >> a;
