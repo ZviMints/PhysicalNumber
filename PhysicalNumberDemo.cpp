@@ -18,6 +18,17 @@ int main() {
 		PhysicalNumber a(2, Unit::KM);   // 2 kilometers
 		PhysicalNumber b(300, Unit::M);  // 300 meters
 		PhysicalNumber c(2,Unit::KM);
+		PhysicalNumber d(1,Unit::KM);
+		istringstream chk("334[hour]");
+		chk >> d;
+		cout << d << endl;
+
+
+		PhysicalNumber hour(1,Unit::HOUR);
+		PhysicalNumber min(30,Unit::MIN);
+		cout << min + hour << endl;
+
+		
 		cout << (a!=b) << endl;
 		cout << a << endl;   // Prints "2[km]"
 		cout << -a << endl;

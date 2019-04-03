@@ -21,8 +21,8 @@ int main() {
 
 		// BASIC TESTS - DO NOT CHANGE
 
-		PhysicalNumber a(1, Unit::KM);
-		PhysicalNumber b(1, Unit::M);
+		PhysicalNumber a(2, Unit::KM);
+		PhysicalNumber b(300, Unit::M);
 		PhysicalNumber c(2, Unit::HOUR);
 		PhysicalNumber d(30, Unit::MIN);
 
@@ -105,7 +105,6 @@ int main() {
 			.CHECK_OK(min + sec) .CHECK_OK(min - sec) .CHECK_OK(min += sec) .CHECK_OK(min -= sec)
 
 			.setname("Checkoutput [+],[-]")
-
 			.CHECK_OUTPUT(cm + km,"100001[cm]") .CHECK_OUTPUT(cm - km,"-99999[cm]")
 			.CHECK_OUTPUT(cm + m,"101[cm]") .CHECK_OUTPUT(cm - m,"-99[cm]")
 			.CHECK_OUTPUT(m + km,"1001[m]") .CHECK_OUTPUT(m - km,"-999[m]") 
@@ -113,6 +112,11 @@ int main() {
 			.CHECK_OUTPUT(ton + ton,"2[ton]") .CHECK_OUTPUT(ton - ton,"0[ton]") 
 			.CHECK_OUTPUT(ton + kg,"1.001[ton]") .CHECK_OUTPUT(ton - kg,"0.999[ton]") 
 			.CHECK_OUTPUT(kg + g,"1.001[kg]") .CHECK_OUTPUT(kg - g,"0.999[kg]") 
+             
+			.setname("Prefix and Postfix [++],[--]")
+			.CHECK_OUTPUT(kg,"1[kg]")  .CHECK_OUTPUT(kg++,"1[kg]") .CHECK_OUTPUT(kg,"2[kg]") 
+			.CHECK_OUTPUT(kg,"2[kg]")  .CHECK_OUTPUT(--kg,"1[kg]") .CHECK_OUTPUT(kg,"1[kg]") 
+
 			
 			.setname("...")
 			.print(cout, /*show_grade=*/false);

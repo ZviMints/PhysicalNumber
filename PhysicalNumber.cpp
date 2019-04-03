@@ -1,5 +1,7 @@
 #include "PhysicalNumber.h"
 #include "Calculator.h"
+#include <math.h> 
+
 using namespace ariel;
 PhysicalNumber::PhysicalNumber(double _value, Unit _type)
  : _value(_value), _type(_type) {}
@@ -126,10 +128,10 @@ else
                 break;
             }
             break;
-            case Unit::M :
+            case Unit::MIN :
             switch(other._type)
             {
-                case Unit::TON : 
+                case Unit::HOUR : 
                 new_value += Calculator::HOUR_TO_MIN(other._value);
                 break;
                 case Unit::MIN :
@@ -279,10 +281,10 @@ else
                 break;
             }
             break;
-            case Unit::M :
+            case Unit::MIN :
             switch(other._type)
             {
-                case Unit::TON : 
+                case Unit::HOUR : 
                 new_value -= Calculator::HOUR_TO_MIN(other._value);
                 break;
                 case Unit::MIN :
@@ -296,7 +298,7 @@ else
             default:
             switch(other._type)
             {
-                case Unit::TON : 
+                case Unit::HOUR : 
                 new_value -= Calculator::HOUR_TO_SEC(other._value);
                 break;
                 case Unit::MIN :
@@ -312,11 +314,23 @@ else
     return PhysicalNumber(new_value,new_type);
     }
 }
-PhysicalNumber& PhysicalNumber::operator+=(const PhysicalNumber& other) { return *this; }
-PhysicalNumber& PhysicalNumber::operator-=(const PhysicalNumber& other) { return *this; }
-PhysicalNumber& PhysicalNumber::operator=(const PhysicalNumber& other) { return *this; }
+PhysicalNumber& PhysicalNumber::operator+=(const PhysicalNumber& other) {
+   PhysicalNumber ans = *this + other;
+   this->_value = ans._value;
+   return *this; 
+ }
+PhysicalNumber& PhysicalNumber::operator-=(const PhysicalNumber& other) {
+   PhysicalNumber ans = *this - other;
+   this->_value = ans._value;
+   return *this;   
+}
+PhysicalNumber& PhysicalNumber::operator=(const PhysicalNumber& other) { 
+    this->_value = other._value;
+    this->_type = other._type;
+    return *this;
+}
 
-// 6 comparison operators                                                              //[V]
+// 6 comparison operators                                                              
 bool ariel::operator==(const PhysicalNumber& p1, const PhysicalNumber& p2) { 
     if ((p2._type == p1._type ) && (p2._value == p1._value)) return true;
     return false;
@@ -335,16 +349,24 @@ bool ariel::operator<=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if 
 
 // Increasing and decreasing by one operators
 // Postfix: (A--)
-PhysicalNumber PhysicalNumber::operator++(int) { return *this; }
-PhysicalNumber PhysicalNumber::operator++() {
-    double new_value = this->_value + 1;
-    return PhysicalNumber(new_value, this->_type);
-}    
+PhysicalNumber PhysicalNumber::operator++(int) {
+PhysicalNumber temp(*this);
+this->_value ++ ;
+return temp;
+}
+PhysicalNumber PhysicalNumber::operator--(int) { 
+PhysicalNumber temp(*this);
+this->_value -- ;
+return temp;
+}
 // Prefix: (--A)
-PhysicalNumber PhysicalNumber::operator--(int) { return *this; }
-PhysicalNumber PhysicalNumber::operator--() { 
-    double new_value = this->_value - 1;
-    return PhysicalNumber(new_value, this->_type);
+PhysicalNumber& PhysicalNumber::operator++() {
+    ++ this->_value;
+    return *this;
+}    
+PhysicalNumber& PhysicalNumber::operator--() { 
+    -- this->_value;
+    return *this;
 }
 
 // I/O 
@@ -363,8 +385,38 @@ switch(other._type)
     case Unit::SEC : typeof = "sec"; break;
 }
 return os << other._value << "[" << typeof <<"]";
+} // Need to add checks
+std::istream& ariel::operator>>(std::istream& is, PhysicalNumber& other) {
+std::string ans;
+is >> ans;
+double new_value = 0;
+std::string s_type = "";
+int n = ans.find('[') - 1;
+for(int i=0; i<=n; i++)
+{
+    new_value += pow(10,n-i) * (ans[i] - '0');
 }
-std::istream& ariel::operator>>(std::istream& is, PhysicalNumber& other) { return is; }
+for(int i=n+2; ans[i]!=']'; i++)
+{
+           s_type += ans[i]; 
+}
+Unit new_type;
+if( s_type.compare("km") == 0 ) new_type = Unit::KM; 
+else if( s_type.compare("m") == 0 ) new_type = Unit::M; 
+else if( s_type.compare("cm") == 0 ) new_type = Unit::CM; 
+
+else if( s_type.compare("ton") == 0 ) new_type = Unit::TON; 
+else if( s_type.compare("kg") == 0 ) new_type = Unit::KG; 
+else if( s_type.compare("g") == 0 ) new_type = Unit::G; 
+
+else if( s_type.compare("hour") == 0 ) new_type = Unit::HOUR; 
+else if( s_type.compare("min") == 0 ) new_type = Unit::MIN; 
+else new_type = Unit::SEC; // ( s_type.compare("sec") ==0  )
+
+other._type = new_type;
+other._value = new_value;
+return is;
+}
 
 // Bonus:
 PhysicalNumber& PhysicalNumber::operator/(const PhysicalNumber& other) { return *this;  }
@@ -372,7 +424,7 @@ PhysicalNumber& PhysicalNumber::operator* (const PhysicalNumber& other) { return
 PhysicalNumber& PhysicalNumber::operator*=(const PhysicalNumber& other) { return *this; }
 PhysicalNumber& PhysicalNumber::operator/=(const PhysicalNumber& other) { return *this; }
 
-// Checking:                                                              //[V]
+// Checking:                                                              
 bool PhysicalNumber::verifier(const PhysicalNumber& input1, const PhysicalNumber& input2) const {
 if( (is_len(input1,input2) || is_mass(input1,input2) || is_time(input1,input2)) ) return true;
 else return false;
