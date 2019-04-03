@@ -100,7 +100,6 @@ int main() {
 			.CHECK_OK(ton + g) .CHECK_OK(ton - g) .CHECK_OK(ton += g) .CHECK_OK(ton -= g)
 			.CHECK_OK(kg + g) .CHECK_OK(kg - g) .CHECK_OK(kg += g) .CHECK_OK(kg -= g)
 
-			.CHECK_OK(hour + hour) .CHECK_OK(hour - hour) .CHECK_OK(hour += hour) .CHECK_OK(hour -= + hour)
 			.CHECK_OK(hour + min) .CHECK_OK(hour - min) .CHECK_OK(hour += min) .CHECK_OK(hour -= min)
 			.CHECK_OK(hour + sec) .CHECK_OK(hour - sec) .CHECK_OK(hour += sec) .CHECK_OK(hour -= sec)
 			.CHECK_OK(min + sec) .CHECK_OK(min - sec) .CHECK_OK(min += sec) .CHECK_OK(min -= sec)
@@ -108,7 +107,7 @@ int main() {
 			.setname("Checkoutput [+],[-],[+=],[-=]")
 
 			.CHECK_OUTPUT(cm + km,"100001[cm]") .CHECK_OUTPUT(cm - km,"-99999[cm]")
-			.CHECK_OUTPUT(cm + m,"101[cm]") .CHECK_OUTPUT(cm - m,"-99[cm]")
+			.CHECK_OUTPUT(cm + m,"101[cm]") .CHECK_OUT.CHECK_OK(hour + hourPUT(cm - m,"-99[cm]")
 			.CHECK_OUTPUT(m + km,"1001[m]") .CHECK_OUTPUT(m - km,"-999[m]") 
 
 			.CHECK_OUTPUT(ton + ton,"2[ton]") .CHECK_OUTPUT(ton - ton,"0[ton]") 
