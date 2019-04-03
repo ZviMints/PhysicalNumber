@@ -6,8 +6,8 @@ using namespace ariel;
 PhysicalNumber::PhysicalNumber(double _value, Unit _type)
  : _value(_value), _type(_type) {}
 // arithmetic operators
-const PhysicalNumber PhysicalNumber::operator-() { return PhysicalNumber(-_value,_type); }
-const PhysicalNumber PhysicalNumber::operator+() { return PhysicalNumber(_value,_type); }
+PhysicalNumber PhysicalNumber::operator-() { return PhysicalNumber(-_value,_type); }
+PhysicalNumber PhysicalNumber::operator+() { return PhysicalNumber(_value,_type); }
 const PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other) { 
 if(!verifier(*this,other)) throw std::string("Cant do [+] operation");
 else
@@ -165,153 +165,8 @@ const PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber& other) {
 if(!verifier(*this,other)) throw std::string("Cant do [-] operation");
 else
     {
-    double new_value = this->_value;
-    Unit new_type = this->_type;
-    if(is_len(*this,other)) // Its in [KM,M,M]
-    {
-        switch(this->_type) // Its in [KM,M,M]
-        {
-            case Unit::KM : 
-            switch(other._type)
-            {
-                case Unit::KM : 
-                new_value -= other._value;
-                break;
-                case Unit::M :
-                new_value -= Calculator::M_TO_KM(other._value);
-                break;
-                default:
-                new_value -= Calculator::CM_TO_KM(other._value);
-                break;
-            }
-            break;
-            case Unit::M :
-            switch(other._type)
-            {
-                case Unit::KM : 
-                new_value -= Calculator::KM_TO_M(other._value);
-                break;
-                case Unit::M :
-                new_value -= other._value;
-                break;
-                default:
-                new_value -= Calculator::CM_TO_M(other._value);
-                break;
-            }            
-            break;
-            default:
-            switch(other._type)
-            {
-                case Unit::KM : 
-                new_value -= Calculator::KM_TO_CM(other._value);
-                break;
-                case Unit::M :
-                new_value -= Calculator::M_TO_CM(other._value);  
-                break;
-                default:
-                new_value -= other._value;   
-                break;
-            }
-            break;
-        }
-    }
-    else if(is_mass(*this,other)) // Its in [TON,KG,G]
-    {
-        switch(this->_type) // Its in [TON,KG,G]
-        {
-            case Unit::TON : 
-            switch(other._type)
-            {
-                case Unit::TON : 
-                new_value -= other._value;
-                break;
-                case Unit::KG :
-                new_value -= Calculator::KG_TO_TON(other._value);
-                break;
-                default:
-                new_value -= Calculator::G_TO_TON(other._value);
-                break;
-            }
-            break;
-            case Unit::KG :
-            switch(other._type)
-            {
-                case Unit::TON : 
-                new_value -= Calculator::TON_TO_M(other._value);
-                break;
-                case Unit::KG :
-                new_value -= other._value;
-                break;
-                default:
-                new_value -= Calculator::G_TO_KG(other._value);
-                break;
-            }            
-            break;
-            default:
-            switch(other._type)
-            {
-                case Unit::TON : 
-                new_value -= Calculator::TON_TO_G(other._value);
-                break;
-                case Unit::KG :
-                new_value -= Calculator::KM_TO_CM(other._value);  
-                break;
-                default:
-                new_value -= other._value;   
-                break;
-            }
-            break;
-        }
-    }
-    else // Its in [HOUR,MIN,SEC]
-    {
-        switch(this->_type) // Its in [HOUR,MIN,SEC]
-        {
-            case Unit::HOUR : 
-            switch(other._type)
-            {
-                case Unit::HOUR : 
-                new_value -= other._value;
-                break;
-                case Unit::MIN :
-                new_value -= Calculator::MIN_TO_HOUR(other._value);
-                break;
-                default:
-                new_value -= Calculator::SEC_TO_HOUR(other._value);
-                break;
-            }
-            break;
-            case Unit::MIN :
-            switch(other._type)
-            {
-                case Unit::HOUR : 
-                new_value -= Calculator::HOUR_TO_MIN(other._value);
-                break;
-                case Unit::MIN :
-                new_value -= other._value;
-                break;
-                default:
-                new_value -= Calculator::SEC_TO_MIN(other._value);
-                break;
-            }            
-            break;
-            default:
-            switch(other._type)
-            {
-                case Unit::HOUR : 
-                new_value -= Calculator::HOUR_TO_SEC(other._value);
-                break;
-                case Unit::MIN :
-                new_value -= Calculator::MIN_TO_SEC(other._value);  
-                break;
-                default:
-                new_value += other._value;   
-                break;
-            }
-            break;
-        }
-    }
-    return PhysicalNumber(new_value,new_type);
+        PhysicalNumber temp(- other._value, other._type);
+        return *this + temp;
     }
 }
 PhysicalNumber& PhysicalNumber::operator+=(const PhysicalNumber& other) {
