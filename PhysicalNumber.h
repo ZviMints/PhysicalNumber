@@ -16,8 +16,8 @@ namespace ariel {
 		// arithmetic operators
 		const PhysicalNumber operator-(); //[V]
 		const PhysicalNumber operator+(); //[V]
-		PhysicalNumber operator+(const PhysicalNumber&); //[V]
-		PhysicalNumber operator-(const PhysicalNumber&); //[V]
+		const PhysicalNumber operator+(const PhysicalNumber&); //[V]
+		const PhysicalNumber operator-(const PhysicalNumber&); //[V]
 		PhysicalNumber& operator+=(const PhysicalNumber&);  //[V]
 		PhysicalNumber& operator-=(const PhysicalNumber&); //[V]
 		PhysicalNumber& operator=(const PhysicalNumber&); //[V]

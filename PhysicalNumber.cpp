@@ -6,9 +6,9 @@ using namespace ariel;
 PhysicalNumber::PhysicalNumber(double _value, Unit _type)
  : _value(_value), _type(_type) {}
 // arithmetic operators
-PhysicalNumber PhysicalNumber::operator-() { return PhysicalNumber(-_value,_type); }
-PhysicalNumber PhysicalNumber::operator+() { return PhysicalNumber(_value,_type); }
-PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other) { 
+const PhysicalNumber PhysicalNumber::operator-() { return PhysicalNumber(-_value,_type); }
+const PhysicalNumber PhysicalNumber::operator+() { return PhysicalNumber(_value,_type); }
+const PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other) { 
 if(!verifier(*this,other)) throw std::string("Cant do [+] operation");
 else
     {
@@ -161,7 +161,7 @@ else
     return PhysicalNumber(new_value,new_type);
     }
 }
-PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber& other) { 
+const PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber& other) { 
 if(!verifier(*this,other)) throw std::string("Cant do [-] operation");
 else
     {
