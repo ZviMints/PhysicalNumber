@@ -114,8 +114,6 @@ int main() {
 			.CHECK_OUTPUT(ton + ton,"2[ton]") .CHECK_OUTPUT(ton - ton,"0[ton]") 
 			.CHECK_OUTPUT(ton + kg,"1.001[ton]") .CHECK_OUTPUT(ton - kg,"0.999[ton]") 
 			.CHECK_OUTPUT(kg + g,"1.001[kg]") .CHECK_OUTPUT(kg - g,"0.999[kg]") 
-
-			.CHECK_OUTPUT(hour + hour,"2[hour]") .CHECK_OUTPUT(hour - hour,"0[hour]")
 			
 			.setname("...")
 			.print(cout, /*show_grade=*/false);
