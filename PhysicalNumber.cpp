@@ -78,7 +78,7 @@ else
                 break;
             }
             break;
-            case Unit::M :
+            case Unit::KG :
             switch(other._type)
             {
                 case Unit::TON : 
@@ -231,7 +231,7 @@ else
                 break;
             }
             break;
-            case Unit::M :
+            case Unit::KG :
             switch(other._type)
             {
                 case Unit::TON : 
