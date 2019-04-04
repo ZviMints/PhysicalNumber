@@ -1,14 +1,15 @@
 #include "PhysicalNumber.h"
 #include "Calculator.h"
+#include <regex> 
 #include <math.h> 
 
 using namespace ariel;
 PhysicalNumber::PhysicalNumber(double _value, Unit _type)
  : _value(_value), _type(_type) {}
 // arithmetic operators
-PhysicalNumber PhysicalNumber::operator-() { return PhysicalNumber(-_value,_type); }
-PhysicalNumber PhysicalNumber::operator+() { return PhysicalNumber(_value,_type); }
-const PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other) { 
+const PhysicalNumber PhysicalNumber::operator-() const { return PhysicalNumber(-_value,_type); }
+const PhysicalNumber PhysicalNumber::operator+() const { return PhysicalNumber(_value,_type); }
+const PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other) const { 
 if(!verifier(*this,other)) throw std::string("Cant do [+] operation");
 else
     {
@@ -161,7 +162,7 @@ else
     return PhysicalNumber(new_value,new_type);
     }
 }
-const PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber& other) { 
+const PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber& other) const { 
 if(!verifier(*this,other)) throw std::string("Cant do [-] operation");
 else
     {
@@ -204,12 +205,12 @@ bool ariel::operator<=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if 
 
 // Increasing and decreasing by one operators
 // Postfix: (A--)
-PhysicalNumber PhysicalNumber::operator++(int) {
+const PhysicalNumber PhysicalNumber::operator++(int) {
 PhysicalNumber temp(*this);
 this->_value ++ ;
 return temp;
 }
-PhysicalNumber PhysicalNumber::operator--(int) { 
+const PhysicalNumber PhysicalNumber::operator--(int) { 
 PhysicalNumber temp(*this);
 this->_value -- ;
 return temp;
@@ -244,6 +245,12 @@ return os << other._value << "[" << typeof <<"]";
 std::istream& ariel::operator>>(std::istream& is, PhysicalNumber& other) {
 std::string ans;
 is >> ans;
+     
+std::regex certificate("[0-9]{1,}+\[+[cm|km|m|ton|kg|g|hour|min|sec]+]");
+if(! std::regex_match(ans,certificate))
+{
+    throw std::string("Invalid Input for: " + ans + ".");
+}
 double new_value = 0;
 std::string s_type = "";
 int n = ans.find('[') - 1;

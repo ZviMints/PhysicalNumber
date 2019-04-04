@@ -1,7 +1,6 @@
 #ifndef PHYSICALNUMBER_H
 #define PHYSICALNUMBER_H
 #include "Unit.h"
-using namespace ariel;
 #include <iostream>
 namespace ariel {
 	class PhysicalNumber {
@@ -14,10 +13,10 @@ namespace ariel {
 		PhysicalNumber(double, Unit);
 
 		// arithmetic operators
-		PhysicalNumber operator-(); //[V]
-		PhysicalNumber operator+(); //[V]
-		const PhysicalNumber operator+(const PhysicalNumber&); //[V]
-		const PhysicalNumber operator-(const PhysicalNumber&); //[V]
+		const PhysicalNumber operator-() const; //[V]
+		const PhysicalNumber operator+() const; //[V]
+		const PhysicalNumber operator+(const PhysicalNumber&) const; //[V]
+		const PhysicalNumber operator-(const PhysicalNumber&) const; //[V]
 		PhysicalNumber& operator+=(const PhysicalNumber&);  //[V]
 		PhysicalNumber& operator-=(const PhysicalNumber&); //[V]
 		PhysicalNumber& operator=(const PhysicalNumber&); //[V]
@@ -32,12 +31,11 @@ namespace ariel {
 
 		// Increasing and decreasing by one operators
 		// Postfix: (A--)
-		PhysicalNumber operator++(int); //[V]
-		PhysicalNumber operator--(int); //[V]
+		const PhysicalNumber operator++(int); //[V]
+		const PhysicalNumber operator--(int); //[V]
 		// Prefix: (--A)
 		PhysicalNumber& operator++(); //[V]
 		PhysicalNumber& operator--(); //[V]
-
 		// I/O
 		friend std::ostream& operator<<(std::ostream&, const PhysicalNumber&); //[V]
 		friend std::istream& operator>>(std::istream&, PhysicalNumber&); //[V]
