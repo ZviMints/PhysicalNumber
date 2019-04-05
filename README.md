@@ -2,7 +2,7 @@
 PhysicalNumber Project made during CPP course at Ariel University 2019.
 
 Project site: https://github.com/ZviMints/Binary-Search-Tree.git
-Made by: Zvi Mints and Or Abuhazira and Eilon Tsadok'
+Made by: Zvi Mints and Or Abuhazira and Eilon Tsadok.
 
 # what is PhysicalNumber:
 PhysicalNumber class represent number of some specific unit.
