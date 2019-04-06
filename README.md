@@ -1,10 +1,10 @@
-# PhysicalNumber
-PhysicalNumber Project made during CPP course at Ariel University 2019.
+<img src="https://media.licdn.com/dms/image/C4D0BAQGD7npMPoXymw/company-logo_200_200/0?e=2159024400&v=beta&t=TZ8Ub3U2jCZgA1_kAx6SE8jmAcSJkbiZAuN6Kn1_lW0" height="100px">
 
-Project site: https://github.com/ZviMints/Binary-Search-Tree.git
+# PhysicalNumber :boom:
+PhysicalNumber Project made during CPP course at Ariel University 2019.
 Made by: Zvi Mints and Or Abuhazira and Eilon Tsadok.
 
-# what is PhysicalNumber:
+# What is PhysicalNumber:
 PhysicalNumber class represent number of some specific unit.
 for example 5kg or 3.2 ton.
 This class contains units of:
