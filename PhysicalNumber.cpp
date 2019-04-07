@@ -1,9 +1,11 @@
 #include "PhysicalNumber.h"
 #include "Calculator.h"
-#include <regex> 
 #include <math.h> 
+#include <iostream>
+#include <string>
 
 using namespace ariel;
+
 PhysicalNumber::PhysicalNumber(double _value, Unit _type)
  : _value(_value), _type(_type) {}
 // arithmetic operators
@@ -102,7 +104,7 @@ else
                 new_value += Calculator::TON_TO_G(other._value);
                 break;
                 case Unit::KG :
-                new_value += Calculator::KM_TO_CM(other._value);  
+                new_value += Calculator::KG_TO_G(other._value);  
                 break;
                 default:
                 new_value += other._value;   
@@ -188,20 +190,21 @@ PhysicalNumber& PhysicalNumber::operator=(const PhysicalNumber& other) {
 
 // 6 comparison operators                                                              
 bool ariel::operator==(const PhysicalNumber& p1, const PhysicalNumber& p2) { 
-    if ((p2._type == p1._type ) && (p2._value == p1._value)) return true;
-    return false;
+if(!PhysicalNumber::verifier(p1,p2)) throw std::string("Cant Compare! [==]");
+double _compare = (p1 - p2)._value;
+if ( _compare == 0 ) return true;
+else return false;
 }
 bool ariel::operator<(const PhysicalNumber& p1, const PhysicalNumber& p2) {
-    if(p2._type == p1._type)
-    {
-        return (p2._value < p1._value);
-    }
-    else throw std::string("Cant compare");
+if(!PhysicalNumber::verifier(p1,p2)) throw std::string("Cant Compare!");
+double _compare = (p1 - p2)._value;
+if ( _compare < 0 ) return true;
+else return false;
 }
 bool ariel::operator!=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p2 == p1)) return true; else return false; }
-bool ariel::operator>=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p2 < p1)) return true; else return false; }
-bool ariel::operator>(const PhysicalNumber& p1, const PhysicalNumber& p2) {  if ((p1 < p2)) return true; else return false; }
-bool ariel::operator<=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p2 > p1)) return true; else return false; }
+bool ariel::operator>=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p1 < p2)) return true; else return false; }
+bool ariel::operator>(const PhysicalNumber& p1, const PhysicalNumber& p2) {  if ((p2 < p1)) return true; else return false; }
+bool ariel::operator<=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p1 > p2)) return true; else return false; }
 
 // Increasing and decreasing by one operators
 // Postfix: (A--)
@@ -243,26 +246,22 @@ switch(other._type)
 return os << other._value << "[" << typeof <<"]";
 } // Need to add checks
 std::istream& ariel::operator>>(std::istream& is, PhysicalNumber& other) {
-std::string ans;
-is >> ans;
-     
-std::regex certificate("[0-9]{1,}+\[+[cm|km|m|ton|kg|g|hour|min|sec]+]");
-if(! std::regex_match(ans,certificate))
-{
-    throw std::string("Invalid Input for: " + ans + ".");
-}
-double new_value = 0;
-std::string s_type = "";
-int n = ans.find('[') - 1;
-for(int i=0; i<=n; i++)
-{
-    new_value += pow(10,n-i) * (ans[i] - '0');
-}
-for(int i=n+2; ans[i]!=']'; i++)
-{
-           s_type += ans[i]; 
-}
-Unit new_type;
+std::string input;
+is >> input;
+
+Unit new_type; // Answers
+double new_value; // Ansers
+
+int f_index = input.find('[');
+int l_index = input.find(']');
+
+if(f_index == -1 || l_index == -1 || f_index > l_index) throw std::string("Invalid Input for: " + input + ".");
+
+std::string numbers = input.substr(0,f_index);
+std::string s_type = input.substr(f_index+1,l_index - f_index - 1 );
+
+new_value = stod(numbers);
+
 if( s_type.compare("km") == 0 ) new_type = Unit::KM; 
 else if( s_type.compare("m") == 0 ) new_type = Unit::M; 
 else if( s_type.compare("cm") == 0 ) new_type = Unit::CM; 
@@ -273,7 +272,8 @@ else if( s_type.compare("g") == 0 ) new_type = Unit::G;
 
 else if( s_type.compare("hour") == 0 ) new_type = Unit::HOUR; 
 else if( s_type.compare("min") == 0 ) new_type = Unit::MIN; 
-else new_type = Unit::SEC; // ( s_type.compare("sec") ==0  )
+else if( s_type.compare("sec") == 0 ) new_type = Unit::SEC;
+else throw std::string("Invalid Input for: " + input + ".");
 
 other._type = new_type;
 other._value = new_value;
@@ -287,25 +287,25 @@ PhysicalNumber& PhysicalNumber::operator*=(const PhysicalNumber& other) { return
 PhysicalNumber& PhysicalNumber::operator/=(const PhysicalNumber& other) { return *this; }
 
 // Checking:                                                              
-bool PhysicalNumber::verifier(const PhysicalNumber& input1, const PhysicalNumber& input2) const {
+bool PhysicalNumber::verifier(const PhysicalNumber& input1, const PhysicalNumber& input2)  {
 if( (is_len(input1,input2) || is_mass(input1,input2) || is_time(input1,input2)) ) return true;
 else return false;
 }
-bool PhysicalNumber::is_len(const PhysicalNumber& input1, const PhysicalNumber& input2) const {
+bool PhysicalNumber::is_len(const PhysicalNumber& input1, const PhysicalNumber& input2)  {
 Unit type1 = input1._type;
 Unit type2 = input2._type;
 if(      ((type1 == Unit::KM) || (type1 == Unit::M) || (type1 == Unit::CM)) && 
          ((type2 == Unit::KM) || (type2 == Unit::M) || (type2 == Unit::CM))         ) return true;
 else return false;
 }
-bool PhysicalNumber::is_mass(const PhysicalNumber& input1, const PhysicalNumber& input2) const {
+bool PhysicalNumber::is_mass(const PhysicalNumber& input1, const PhysicalNumber& input2)  {
 Unit type1 = input1._type;
 Unit type2 = input2._type;   
  if(      ((type1 == Unit::TON) || (type1 == Unit::KG) || (type1 == Unit::G)) && 
          ((type2 == Unit::TON) || (type2 == Unit::KG) || (type2 == Unit::G))         ) return true;
 else return false;   
  }
-bool PhysicalNumber::is_time(const PhysicalNumber& input1, const PhysicalNumber& input2) const {
+bool PhysicalNumber::is_time(const PhysicalNumber& input1, const PhysicalNumber& input2)  {
 Unit type1 = input1._type;
 Unit type2 = input2._type;
 if(      ((type1 == Unit::HOUR) || (type1 == Unit::MIN) || (type1 == Unit::SEC)) && 
