@@ -145,10 +145,10 @@ else
                 break;
             }            
             break;
-            default:
+            default: // Unit::SEC :
             switch(other._type)
             {
-                case Unit::TON : 
+                case Unit::HOUR : 
                 new_value += Calculator::HOUR_TO_SEC(other._value);
                 break;
                 case Unit::MIN :
@@ -196,7 +196,7 @@ double _compare = (p1 - p2)._value;
 if ( _compare < 0 ) return true;
 else return false;
 }
-bool ariel::operator!=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p2 == p1)) return true; else return false; }
+bool ariel::operator!=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p1 == p2)) return true; else return false; }
 bool ariel::operator>=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p1 < p2)) return true; else return false; }
 bool ariel::operator>(const PhysicalNumber& p1, const PhysicalNumber& p2) {  if ((p2 < p1)) return true; else return false; }
 bool ariel::operator<=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p1 > p2)) return true; else return false; }
