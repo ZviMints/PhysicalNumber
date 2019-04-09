@@ -11,12 +11,12 @@ class Calculator {
 
     static double G_TO_KG(double G) { return 0.001 * G; }
     static double KG_TO_G(double KG) { return 1000 * KG; }
-    static double KG_TO_TON(double KG) { return 0.001* KG; }
+    static double KG_TO_TON(double KG) { return 0.001 * KG; }
     static double TON_TO_M(double TON) { return 1000 * TON; }
     static double TON_TO_G(double TON) { return KG_TO_G(TON_TO_M(TON)); }
     static double G_TO_TON(double G) { return KG_TO_TON(G_TO_KG(G)); }
 
-    static double SEC_TO_MIN(double SEC) { return 0.016666667 * SEC; }
+    static double SEC_TO_MIN(double SEC) { return SEC / 60.0 ; }
     static double MIN_TO_SEC(double MIN) { return 60 * MIN; }
     static double MIN_TO_HOUR(double MIN) { return 0.01667 * MIN; }
     static double HOUR_TO_MIN(double HOUR) { return 60 * HOUR; }
