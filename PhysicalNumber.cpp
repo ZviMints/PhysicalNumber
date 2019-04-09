@@ -250,7 +250,7 @@ double new_value; // Ansers
 int f_index = input.find('[');
 int l_index = input.find(']');
 
-if(f_index == -1 || l_index == -1 || f_index > l_index) throw std::string("Invalid Input for: " + input + ".");
+if(f_index == -1 || l_index == -1 || f_index > l_index) std::cout << "Invalid Input for: " << input << ".";
 
 std::string numbers = input.substr(0,f_index);
 std::string s_type = input.substr(f_index+1,l_index - f_index - 1 );
