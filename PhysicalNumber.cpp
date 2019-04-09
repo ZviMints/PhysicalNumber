@@ -243,11 +243,10 @@ return os << other._value << "[" << typeof <<"]";
 std::istream& ariel::operator>>(std::istream& is, PhysicalNumber& other) {
 std::string input;
 
+is >> input;
+
 // remember place for rewinding
 std::ios::pos_type startPosition = is.tellg();
-
-
-is >> input;
 
 Unit new_type; // Answers
 double new_value; // Ansers
