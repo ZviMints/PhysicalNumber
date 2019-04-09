@@ -256,6 +256,7 @@ int l_index = input.find(']');
 
 if(f_index == -1 || l_index == -1 || f_index >= l_index) 
 {
+    is.setstate(ios::failbit);
     auto errorState = is.rdstate(); // remember error state
     is.clear(); // clear error so seekg will work
     is.seekg(startPosition); // rewind
