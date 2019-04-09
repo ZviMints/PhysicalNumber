@@ -243,8 +243,14 @@ return os << other._value << "[" << typeof <<"]";
 std::istream& ariel::operator>>(std::istream& is, PhysicalNumber& other) {
 std::string input;
 
-is >> input;
-
+if(!is >> input)
+{
+    auto errorState = is.rdstate(); // remember error state
+    is.clear(); // clear error so seekg will work
+    is.seekg(startPosition); // rewind
+    is.clear(errorState); // set back the error flag
+    return is;    
+}
 // remember place for rewinding
 std::ios::pos_type startPosition = is.tellg();
 
