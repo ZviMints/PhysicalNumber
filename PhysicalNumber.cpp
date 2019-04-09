@@ -270,7 +270,6 @@ std::cout << numbers << std::endl;
 try
 {
     new_value = stod(numbers);   
-    std::cout << "Converted string to a value of " << new_value << std::endl;
 }
 catch(std::exception& e)
 {
