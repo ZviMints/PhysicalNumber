@@ -247,14 +247,7 @@ std::string input;
 std::ios::pos_type startPosition = is.tellg();
 
 
-if(!(is >> input)) 
-{
-    auto errorState = is.rdstate(); // remember error state
-    is.clear(); // clear error so seekg will work
-    is.seekg(startPosition); // rewind
-    is.clear(errorState); // set back the error flag
-}
-
+is >> input;
 
 Unit new_type; // Answers
 double new_value; // Ansers
