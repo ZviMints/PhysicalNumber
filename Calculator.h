@@ -18,7 +18,7 @@ class Calculator {
 
     static double SEC_TO_MIN(double SEC) { return SEC / 60.0 ; }
     static double MIN_TO_SEC(double MIN) { return 60 * MIN; }
-    static double MIN_TO_HOUR(double MIN) { return 0.01667 * MIN; }
+    static double MIN_TO_HOUR(double MIN) { return MIN / 60 ; }
     static double HOUR_TO_MIN(double HOUR) { return 60 * HOUR; }
     static double HOUR_TO_SEC(double HOUR) { return MIN_TO_SEC(HOUR_TO_MIN(HOUR)); }
     static double SEC_TO_HOUR(double SEC) { return MIN_TO_HOUR(SEC_TO_MIN(SEC)); }
