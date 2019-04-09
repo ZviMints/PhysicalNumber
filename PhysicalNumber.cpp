@@ -242,7 +242,8 @@ return os << other._value << "[" << typeof <<"]";
 } // Need to add checks
 std::istream& ariel::operator>>(std::istream& is, PhysicalNumber& other) {
 std::string input;
-is >> input;
+if(! (is >> input)) throw std::string("Invalid Input for: " + input + ".");
+
 
 Unit new_type; // Answers
 double new_value; // Ansers
