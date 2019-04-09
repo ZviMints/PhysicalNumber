@@ -257,10 +257,7 @@ int l_index = input.find(']');
 
 if(f_index == -1 || l_index == -1 || f_index >= l_index) 
 {
-    auto errorState = is.rdstate(); // remember error state
-    is.clear(); // clear error so seekg will work
-    is.seekg(startPosition); // rewind
-    is.clear(errorState); // set back the error flag
+    return is;
 }
 
 std::string numbers = input.substr(0,f_index);
