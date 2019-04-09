@@ -266,7 +266,6 @@ if(f_index == -1 || l_index == -1 || f_index >= l_index)
 std::string numbers = input.substr(0,f_index);
 std::string s_type = input.substr(f_index+1,l_index - f_index - 1 );
 
-std::cout << numbers << std::endl;
 try
 {
     new_value = stod(numbers);   
