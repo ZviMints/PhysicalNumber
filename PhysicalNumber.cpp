@@ -242,7 +242,18 @@ return os << other._value << "[" << typeof <<"]";
 } // Need to add checks
 std::istream& ariel::operator>>(std::istream& is, PhysicalNumber& other) {
 std::string input;
-if(! (is >> input)) throw std::string("Invalid Input for: " + input + ".");
+
+// remember place for rewinding
+std::ios::pos_type startPosition = is.tellg();
+
+
+if(! (is >> input)) 
+{
+    auto errorState = is.rdstate(); // remember error state
+    is.clear(); // clear error so seekg will work
+    is.seekg(startPosition); // rewind
+    is.clear(errorState); // set back the error flag
+}
 
 
 Unit new_type; // Answers
@@ -251,7 +262,13 @@ double new_value; // Ansers
 int f_index = input.find('[');
 int l_index = input.find(']');
 
-if(f_index == -1 || l_index == -1 || f_index >= l_index) throw std::string("Invalid Input for: " + input + ".");
+if(f_index == -1 || l_index == -1 || f_index >= l_index) 
+{
+    auto errorState = is.rdstate(); // remember error state
+    is.clear(); // clear error so seekg will work
+    is.seekg(startPosition); // rewind
+    is.clear(errorState); // set back the error flag
+}
 
 std::string numbers = input.substr(0,f_index);
 std::string s_type = input.substr(f_index+1,l_index - f_index - 1 );
