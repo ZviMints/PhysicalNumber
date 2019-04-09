@@ -277,10 +277,7 @@ else if( s_type.compare("hour") == 0 ) new_type = Unit::HOUR;
 else if( s_type.compare("min") == 0 ) new_type = Unit::MIN; 
 else if( s_type.compare("sec") == 0 ) new_type = Unit::SEC;
 else {
-    auto errorState = is.rdstate(); // remember error state
-    is.clear(); // clear error so seekg will work
-    is.seekg(startPosition); // rewind
-    is.clear(errorState); // set back the error flag
+    return is;
 }
 
 other._type = new_type;
