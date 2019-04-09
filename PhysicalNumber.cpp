@@ -6,7 +6,7 @@
 
 using namespace ariel;
 
-PhysicalNumber::PhysicalNumber(float _value, Unit _type)
+PhysicalNumber::PhysicalNumber(double _value, Unit _type)
  : _value(_value), _type(_type) {}
 // arithmetic operators
 const PhysicalNumber PhysicalNumber::operator-() const { return PhysicalNumber(-_value,_type); }
@@ -15,7 +15,7 @@ const PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other) cons
 if(!verifier(*this,other)) throw std::string("Cant do [+] operation");
 else
     {
-    float new_value = this->_value;
+    double new_value = this->_value;
     Unit new_type = this->_type;
     if(is_len(*this,other)) // Its in [KM,M,M]
     {
@@ -192,7 +192,7 @@ PhysicalNumber& PhysicalNumber::operator=(const PhysicalNumber& other) {
 bool ariel::operator==(const PhysicalNumber& p1, const PhysicalNumber& p2) { if ((p1 >= p2) && (p1 > p2)) return true; else return false;}
 bool ariel::operator<(const PhysicalNumber& p1, const PhysicalNumber& p2) {
 if(!PhysicalNumber::verifier(p1,p2)) throw std::string("Cant Compare!");
-float _compare = (p1 - p2)._value;
+double _compare = (p1 - p2)._value;
 if ( _compare < 0 ) return true;
 else return false;
 }
@@ -245,7 +245,7 @@ std::string input;
 is >> input;
 
 Unit new_type; // Answers
-float new_value; // Ansers
+double new_value; // Ansers
 
 int f_index = input.find('[');
 int l_index = input.find(']');

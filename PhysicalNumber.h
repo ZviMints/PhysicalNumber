@@ -5,12 +5,12 @@
 namespace ariel {
 	class PhysicalNumber {
 
-		float _value;
+		double _value;
 		Unit _type;
 
 	public:
 		// Constructors:
-		PhysicalNumber(float, Unit);
+		PhysicalNumber(double, Unit);
 
 		// arithmetic operators
 		const PhysicalNumber operator-() const; //[V]
