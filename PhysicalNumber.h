@@ -22,12 +22,12 @@ namespace ariel {
 		PhysicalNumber& operator=(const PhysicalNumber&); //[V]
 
 		// 6 comparison operators
-		friend bool operator==(const PhysicalNumber&, const PhysicalNumber&) const; //[V]
-		friend bool operator<(const PhysicalNumber&, const PhysicalNumber&) const;  //[V]
-		friend bool operator!=(const PhysicalNumber&, const PhysicalNumber&) const; //[V]
-		friend bool operator<=(const PhysicalNumber&,const PhysicalNumber&) const; //[V]
-		friend bool operator>=(const PhysicalNumber&,const PhysicalNumber&) const; //[V]
-		friend bool operator>(const PhysicalNumber&,const PhysicalNumber&) const; //[V]
+		friend bool operator==(const PhysicalNumber&, const PhysicalNumber&); //[V]
+		friend bool operator<(const PhysicalNumber&, const PhysicalNumber&);  //[V]
+		friend bool operator!=(const PhysicalNumber&, const PhysicalNumber&); //[V]
+		friend bool operator<=(const PhysicalNumber&,const PhysicalNumber&); //[V]
+		friend bool operator>=(const PhysicalNumber&,const PhysicalNumber&); //[V]
+		friend bool operator>(const PhysicalNumber&,const PhysicalNumber&); //[V]
 
 		// Increasing and decreasing by one operators
 		// Postfix: (A--)

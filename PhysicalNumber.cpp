@@ -189,17 +189,17 @@ PhysicalNumber& PhysicalNumber::operator=(const PhysicalNumber& other) {
 }
 
 // 6 comparison operators                                                              
-bool ariel::operator==(const PhysicalNumber& p1, const PhysicalNumber& p2) const { if ((p1 >= p2) && !(p1 > p2)) return true; else return false;}
-bool ariel::operator<(const PhysicalNumber& p1, const PhysicalNumber& p2) const {
+bool ariel::operator==(const PhysicalNumber& p1, const PhysicalNumber& p2) { if ((p1 >= p2) && !(p1 > p2)) return true; else return false;}
+bool ariel::operator<(const PhysicalNumber& p1, const PhysicalNumber& p2) {
 if(!PhysicalNumber::verifier(p1,p2)) throw std::string("Cant Compare!");
 double _compare = (p1 - p2)._value;
 if ( _compare < 0 ) return true;
 else return false;
 }
-bool ariel::operator!=(const PhysicalNumber& p1, const PhysicalNumber& p2) const { if (!(p1 == p2)) return true; else return false; }
-bool ariel::operator>=(const PhysicalNumber& p1, const PhysicalNumber& p2) const { if (!(p1 < p2)) return true; else return false; }
-bool ariel::operator>(const PhysicalNumber& p1, const PhysicalNumber& p2) const {  if ((p2 < p1)) return true; else return false; }
-bool ariel::operator<=(const PhysicalNumber& p1, const PhysicalNumber& p2) const { if (!(p1 > p2)) return true; else return false; }
+bool ariel::operator!=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p1 == p2)) return true; else return false; }
+bool ariel::operator>=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p1 < p2)) return true; else return false; }
+bool ariel::operator>(const PhysicalNumber& p1, const PhysicalNumber& p2) {  if ((p2 < p1)) return true; else return false; }
+bool ariel::operator<=(const PhysicalNumber& p1, const PhysicalNumber& p2) { if (!(p1 > p2)) return true; else return false; }
 
 // Increasing and decreasing by one operators
 // Postfix: (A--)
