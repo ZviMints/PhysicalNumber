@@ -247,7 +247,7 @@ std::string input;
 std::ios::pos_type startPosition = is.tellg();
 
 
-if(! (is >> input)) 
+if(!(is >> input)) 
 {
     auto errorState = is.rdstate(); // remember error state
     is.clear(); // clear error so seekg will work
@@ -286,7 +286,12 @@ else if( s_type.compare("g") == 0 ) new_type = Unit::G;
 else if( s_type.compare("hour") == 0 ) new_type = Unit::HOUR; 
 else if( s_type.compare("min") == 0 ) new_type = Unit::MIN; 
 else if( s_type.compare("sec") == 0 ) new_type = Unit::SEC;
-else throw std::string("Invalid Input for: " + input + ".");
+else {
+    auto errorState = is.rdstate(); // remember error state
+    is.clear(); // clear error so seekg will work
+    is.seekg(startPosition); // rewind
+    is.clear(errorState); // set back the error flag
+}
 
 other._type = new_type;
 other._value = new_value;
