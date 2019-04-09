@@ -274,7 +274,11 @@ try
 }
 catch(std::exception& e)
 {
-    std::cout << "Could not convert string to double" << std::endl;
+    auto errorState = is.rdstate(); // remember error state
+    is.clear(); // clear error so seekg will work
+    is.seekg(startPosition); // rewind
+    is.clear(errorState); // set back the error flag
+    return is;
 }
 
 if( s_type.compare("km") == 0 ) new_type = Unit::KM; 
