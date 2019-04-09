@@ -267,7 +267,15 @@ std::string numbers = input.substr(0,f_index);
 std::string s_type = input.substr(f_index+1,l_index - f_index - 1 );
 
 std::cout << numbers << std::endl;
-new_value = stod(numbers);
+try
+{
+    new_value = stod(numbers);   
+    std::cout << "Converted string to a value of " << new_value << std::endl;
+}
+catch(std::exception& e)
+{
+    std::cout << "Could not convert string to double" << std::endl;
+}
 
 if( s_type.compare("km") == 0 ) new_type = Unit::KM; 
 else if( s_type.compare("m") == 0 ) new_type = Unit::M; 
