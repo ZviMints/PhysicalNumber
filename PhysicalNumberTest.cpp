@@ -133,7 +133,8 @@ int main() {
       .CHECK_OK(istringstream("24[hour]") >> a) .CHECK_OUTPUT(a,"24[hour]") 
       .CHECK_THROWS(istringstream("[cm]3") >> b) 
       .setname("...")
-
+  
+      .CHECK_OK(PhysicalNumber(2,Unit::HOUR) == PhysicalNumber(120,Unit::MIN))
       .print(cout, /*show_grade=*/false);
       
       grade = testcase.grade();

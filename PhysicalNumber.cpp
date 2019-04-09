@@ -182,11 +182,6 @@ PhysicalNumber& PhysicalNumber::operator-=(const PhysicalNumber& other) {
    this->_value = ans._value;
    return *this;   
 }
-PhysicalNumber& PhysicalNumber::operator=(const PhysicalNumber& other) { 
-    this->_value = other._value;
-    this->_type = other._type;
-    return *this;
-}
 
 // 6 comparison operators                                                              
 bool ariel::operator==(const PhysicalNumber& p1, const PhysicalNumber& p2) { if ((p1 >= p2) && !(p1 > p2)) return true; else return false;}
